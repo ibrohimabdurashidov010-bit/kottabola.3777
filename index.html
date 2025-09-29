@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kottabola.377 — Aloqa</title>
+
+  <style>
+    :root{
+      --accent: #ffffff;
+      --muted: #bfc8cf;
+    }
+
+    *{box-sizing:border-box;}
+    html, body{
+      height:100%;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      min-height:100vh;
+      color:var(--accent);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      overflow:hidden;
+      background: transparent;
+    }
+
+    /* Orqa fon video */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* telefon va kompyuter uchun toʻliq qoplaydi */
+      z-index: -1; /* faqat fon bo‘lib qoladi */
+    }
+
+    /* Karta (card) */
+    main.card {
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:420px;
+      background: rgba(0,0,0,0.35);
+      padding:22px 18px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+      text-align:center;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+
+      /* Sayt ochilganda animatsiya */
+      opacity:0;
+      transform: translateY(30px);
+      animation: cardFadeIn 1s forwards;
+    }
+
+    @keyframes cardFadeIn {
+      to {
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+
+    .avatar {
+      width:100px;
+      height:100px;
+      margin: 0 auto 12px;
+      border-radius:50%;
+      overflow:hidden;
+      display:block;
+      border: 4px solid rgba(255,255,255,0.06);
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    h1.handle{
+      margin:8px 0 14px 0;
+      font-size:24px;
+      color:var(--accent);
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .verified { width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; }
+    .verified img{ width:100%; height:100%; object-fit:contain; display:block; }
+
+    .links { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+
+    .btn {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:12px 20px;
+      text-decoration:none;
+      color:#fff;
+      background:#000;
+      border:1px solid #111;
+      font-size:15px;
+      font-weight:600;
+      justify-content:flex-start;
+      border-radius:40px;
+      transition: transform .28s ease, box-shadow .28s ease, background .28s ease;
+      outline:none;
+      position:relative;
+    }
+
+    .btn .icon{
+      width:32px;
+      height:32px;
+      flex:0 0 32px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#000;
+      animation: pulse 4s infinite;
+    }
+
+    .btn .icon img{
+      width:70%;
+      height:70%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .btn .txt{
+      flex:1;
+      text-align:left;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+      background:#111;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    /* Button siljish animatsiyasi */
+    @keyframes btnMove {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(3px); }
+      50% { transform: translateX(-3px); }
+      75% { transform: translateX(2px); }
+      100% { transform: translateX(0); }
+    }
+
+    .shake {
+      animation: btnMove 0.6s ease-in-out;
+    }
+
+    .sub{ font-size:13px; color:var(--muted); margin-top:8px; text-align:center; }
+    footer.note{ margin-top:14px; font-size:12px; color:var(--muted); text-align:center; }
+
+    /* Telefon uchun qo‘shimcha moslashuv */
+    @media (max-width:400px){
+      body { padding:14px; }
+      main.card { padding:17px; border-radius:13px; width:95%; margin:auto; }
+      h1.handle { font-size:20px; }
+      .btn { font-size:16px; padding:12px 14px; gap:12px; border-radius:36px; }
+      .avatar{ width:100px; height:135px; border-width:5px; }
+      .btn .icon{ width:28px; height28:px; }
+    }
+
+    /* Agar ekran juda tor bo'lsa (old phones) */
+    @media (max-width:360px){
+      .btn .txt{ font-size:13px; }
+      h1.handle{ font-size:18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Orqa fon video (telefon formati uchun) -->
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="kottabola.377vidio.mp4" type="video/mp4">
+  Sizning brauzeringiz videoni qo‘llab-quvvatlamaydi.
+</video>
+
+<style>
+  .bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Telefon hajmida to‘liq ko‘rsatadi */
+    background: black;   /* Yon tomonlarni qora qilib to‘ldiradi */
+    transform: translate(-50%, -50%);
+    z-index: -1; /* faqat orqa fon bo‘lib qoladi */
+  }
+</style>
+
+  <main class="card" role="main" aria-label="kottabola.377 aloqa kartasi">
+    <a class="avatar" href="https://www.instagram.com/kottabola.377" target="_blank" rel="noopener noreferrer" aria-label="Profilga o‘tish">
+      <img src="https://i.postimg.cc/dkzzy1ry/photo-2025-09-23-13-44-31.jpg" alt="kottabola.377 profil rasmi">
+    </a>
+
+    <div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+      <h1 class="handle">kottabola.377</h1>
+      <span class="verified" title="Verified"><img src="https://i.postimg.cc/bdpP1tZw/verified.png" alt="verified"></span>
+    </div>
+
+    <div class="links" role="navigation" aria-label="Aloqa linklari">
+      <a class="btn" href="tel:+998993773771" aria-label="Telefon raqam">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/7GyyMQJK/telefon.png" alt=""></span>
+        <span class="txt">Telefon raqam</span>
+      </a>
+
+      <a class="btn" href="https://t.me/kb377uzb" target="_blank" rel="noopener noreferrer" aria-label="Telegram kanal">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/34WMC4Kx/telegram.png" alt=""></span>
+        <span class="txt">Telegram</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/kottabola.377" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/7fXYPDJw/instagram.png" alt=""></span>
+        <span class="txt">Toshkent.filiali</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/kottabola377.samarqand" target="_blank" rel="noopener noreferrer" aria-label="Instagram Samarqand">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/7fXYPDJw/instagram.png" alt=""></span>
+        <span class="txt">Samarqand.filiali</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/kottabola377.shahrisabz" target="_blank" rel="noopener noreferrer" aria-label="Instagram Shahrisabz">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/7fXYPDJw/instagram.png" alt=""></span>
+        <span class="txt">Shahrisabz.filiali</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/kottabola377.kids/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Kids">
+        <span class="icon" aria-hidden="true"><img src="https://i.postimg.cc/7fXYPDJw/instagram.png" alt=""></span>
+        <span class="txt">Bolalar uchun.kids</span>
+      </a>
+    </div>
+
+    <footer class="note" aria-hidden="false">© kottabola.377</footer>
+  </main>
+
+  <script>
+    // Har 4 soniyada buttonlar siljishi (JS original ishlashi saqlangan)
+    const buttons = document.querySelectorAll('.btn');
+    setInterval(() => {
+      buttons.forEach((btn, i) => {
+        setTimeout(() => {
+          btn.classList.add('shake');
+          setTimeout(() => btn.classList.remove('shake'), 600);
+        }, i * 150);
+      });
+    }, 4000);
+  </script>
+</body>
+</html>
